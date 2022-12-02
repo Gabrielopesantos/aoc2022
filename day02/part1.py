@@ -22,10 +22,10 @@ OPPONENT_MOVES = {
 }
 
 PLAYER_MOVES = {
-        "X": "R",
-        "Y": "P",
-        "Z": "S",
-    }
+    "X": "R",
+    "Y": "P",
+    "Z": "S",
+}
 
 def compute(s: str) -> int:
     rounds = [lines.split(" ") for lines in s.splitlines()]

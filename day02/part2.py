@@ -22,10 +22,10 @@ OPPONENT_MOVES = {
 }
 
 GAME_OUTCOMES = {
-        "X": "L",
-        "Y": "D",
-        "Z": "W",
-    }
+    "X": "L",
+    "Y": "D",
+    "Z": "W",
+}
 
 def compute(s: str) -> int:
     rounds = [lines.split(" ") for lines in s.splitlines()]
