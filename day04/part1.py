@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import argparse
 import os.path
-import string
 
 import pytest
 
@@ -10,30 +9,33 @@ import support
 
 INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
 
-CHARS_MAP = string.ascii_lowercase + string.ascii_uppercase
-
 
 def compute(s: str) -> int:
-    priority_sum = 0
     lines = s.splitlines()
+    overlaps = 0
     for line in lines:
-        half_len = len(line)//2
-        first_sack, second_sack = set(line[:half_len]), (line[half_len:])
-        common = first_sack.intersection(second_sack)
-        priority_sum += CHARS_MAP.index(common.pop()) + 1
+        space_1, space_2 = [[int(s)
+                             for s in s.split("-")] for s in line.strip().split(",")]
+        space_1_rng = range(space_1[0], space_1[-1]+1)
+        space_2_rng = range(space_2[0], space_2[-1]+1)
 
-    return priority_sum
+        if space_2[0] in space_1_rng and space_2[-1] in space_1_rng:
+            overlaps += 1
+        elif space_1[0] in space_2_rng and space_1[-1] in space_2_rng:
+            overlaps += 1
+
+    return overlaps
 
 
 INPUT_S = '''\
-vJrwpWtwJgWrhcsFMMfFFhFp
-jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
-PmmdzqPrVvPwwTWBwg
-wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
-ttgJtRGJQctTZtZT
-CrZsJsPPZsGzwwsLwLmpwMDw
+2-4,6-8
+2-3,4-5
+5-7,7-9
+2-8,3-7
+6-6,4-6
+2-6,4-8
 '''
-EXPECTED = 157
+EXPECTED = 2
 
 
 @pytest.mark.parametrize(
