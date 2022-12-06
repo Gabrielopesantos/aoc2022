@@ -47,7 +47,7 @@ def compute(s: str) -> int:
     for stack in puzzle_stacks:
         top_crates += stack[-1]
 
-    return top_crates # Doesn't work with aoc-submit --part 1
+    return top_crates  # Doesn't work with aoc-submit --part 1
 
 
 INPUT_S = '''\
